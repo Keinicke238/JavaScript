@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Document metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Puzzle</title>
+    <!-- Styles for layout and visual appearance -->
+    <style>
+        /* Page body: center the container both axes and set background */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        /* Container centers text and holds the puzzle */
+        .container {
+            text-align: center;
+        }
+        /* Main heading color */
+        h1 {
+            color: #333;
+        }
+        /* Grid container: 4 columns of 100px tiles with small gaps */
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-gap: 2px;
+            background-color: #333;
+            padding: 10px;
+            margin: 20px auto;
+            width: fit-content;
+            cursor: grab;
+        }
+        /* Visual highlight when solved */
+        .puzzle-grid.solved {
+            box-shadow: 0 0 20px #4CAF50;
+        }
+        /* Individual tile: fixed size and background handling */
+        .tile {
+            width: 100px;
+            height: 100px;
+            background-size: cover; /* scale image to fill tile */
+            background-position: center; /* center image in tile */
+            cursor: pointer;
+            border: none;
+            position: relative;
+            transition: transform 0.1s;
+        }
+        /* Slight grow effect for hover on non-empty tiles */
+        .tile:hover:not(.empty) {
+            transform: scale(1.05);
+        }
+        /* Empty tile style: plain background and non-clickable cursor */
+        .tile.empty {
+            background-color: #f0f0f0;
+            cursor: default;
+        }
+        /* Message area styling */
+        #message {
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 30px;
+            color: #4CAF50;
+        }
+        /* Button appearance */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* Button hover color */
+        button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <!-- App container with title, grid, status message and controls -->
+    <div class="container">
+        <!-- Title shown above the puzzle -->
+        <h1>Slider Puzzle</h1>
+        <!-- Puzzle grid element (populated by SliderPuzzle.js) -->
+        <div class="puzzle-grid" id="puzzleGrid"></div>
+        <!-- Message element updated by the script for success/info -->
+        <div id="message"></div>
+        <!-- Shuffle button: calls the global shufflePuzzle() function -->
+        <button onclick="shufflePuzzle()">Shuffle</button>
+    </div>
+    <!-- Include the puzzle script which controls rendering and interaction -->
+    <script src="SliderPuzzle.js"></script>
+</body>
+</html>
