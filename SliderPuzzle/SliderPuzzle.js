@@ -25,7 +25,7 @@ function render() {
     const grid = document.getElementById('puzzleGrid');
     // Clear any existing children (rebuild from scratch)
     grid.innerHTML = '';
-    // For each position index, create a tile element showing the tile image
+    // For each position index, create a tile element showing the tile image, called visitor pattern
     positions.forEach((tileNum, idx) => {
         // Create a div element for this tile
         const tile = document.createElement('div');
@@ -58,7 +58,7 @@ function indexToRC(i) {
 function isAdjacent(i1, i2) {
     // Convert both indices to row/col and compare Manhattan distance
     const a = indexToRC(i1), b = indexToRC(i2);
-    return Math.abs(a.r - b.r) + Math.abs(a.c - b.c) === 1;
+    return Math.abs(a.r - b.r) + Math.abs(a.c - b.c) === 1; //equals without automatic type conversion
 }
 
 // moveAt: attempt to move the tile at `index` into the blank position
@@ -66,11 +66,17 @@ function moveAt(index) {
     // Find the current index of the blank tile in `positions`
     const emptyIndex = positions.indexOf(EMPTY);
     // If the clicked tile is not adjacent to the blank, do nothing
-    if (!isAdjacent(index, emptyIndex)) return;
+    if (!isAdjacent(index, emptyIndex)) 
+        return;
     // Swap the clicked tile with the blank in the positions array
+    //Destructuring - multiple assignment in one line. Removes the structure (bruger krøllede paranteser i stedet?)
+    //right side gets evaluated first, then the left side is assigned. 
+    // This allows us to swap values without a temporary variable.
+    //compiler makes temp array to save results 
     [positions[index], positions[emptyIndex]] = [positions[emptyIndex], positions[index]];
     // Re-render the board after the swap
     render();
+
     // If the puzzle is now solved, show success message and visual state
     if (isSolved()) {
         showMessage('Puzzle Solved! 🎉');
@@ -86,12 +92,18 @@ function moveAt(index) {
 function isSolved() {
     for (let i = 0; i < positions.length; i++) if (positions[i] !== i) return false;
     return true;
+
+    //could be done as:
+    // return positions.every((tileNum, idx) => tileNum === idx);
+    //so as to remove JQuery 
 }
 
 // getAdjacentIndices: return array of valid orthogonal neighbors for a board index
 function getAdjacentIndices(index) {
     const adj = [];
+    //Here is destructuring 
     const { r, c } = indexToRC(index);
+
     if (r > 0) adj.push(index - GRID_SIZE);
     if (r < GRID_SIZE - 1) adj.push(index + GRID_SIZE);
     if (c > 0) adj.push(index - 1);
@@ -101,7 +113,7 @@ function getAdjacentIndices(index) {
 
 // shufflePuzzle: produce a solvable random board by making `moves` legal moves
 // starting from the solved state. This guarantees solvability.
-function shufflePuzzle(moves = 200) {
+function shufflePuzzle(moves = 2) {
     // Reset to solved order
     positions = Array.from({ length: GRID_SIZE * GRID_SIZE }, (_, i) => i);
     // Track the blank index and the previous move to avoid immediately reversing
@@ -109,6 +121,7 @@ function shufflePuzzle(moves = 200) {
     let lastMove = -1;
     for (let i = 0; i < moves; i++) {
         // Choose a random neighbor of the blank that is not the tile we just moved
+        //should have if statement to make sure adj is not empty, for safety
         const adj = getAdjacentIndices(emptyIndex).filter(x => x !== lastMove);
         const pick = adj[Math.floor(Math.random() * adj.length)];
         // Swap the picked tile into the blank
@@ -126,7 +139,9 @@ function shufflePuzzle(moves = 200) {
 }
 
 // showMessage: write a short string into the #message element
-function showMessage(text) { document.getElementById('message').textContent = text; }
+function showMessage(text) { 
+    document.getElementById('message').textContent = text; 
+}
 
 // Initialize the puzzle when the script loads
 initPuzzle();
