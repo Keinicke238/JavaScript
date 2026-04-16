@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "salt": "706971a82e9f83a395997efe3a299f9f",
+    "iv": "6a6a198ab1b7b85a1a28ff7e",
+    "encryptedData": "f6dd62193488858a92845a2d7224a81beff95ee59cd752ee286a9beb1d1d9c612417bfda1bed6eab5c09d9e1995ebcad2b761cb495dec189a0ab3f058105e1f020406e5e",
+    "authTag": "bb295c406dd849be66fa564e458175c0"
+  }
+]
