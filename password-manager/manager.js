@@ -1,5 +1,5 @@
-console.log('manager.js loaded');
-console.log('Arguments recieved:', process.argv);
+//console.log('manager.js loaded');
+//console.log('Arguments recieved:', process.argv);
 
 //importing crypto for encryption
 const crypto = require('crypto');
@@ -236,7 +236,55 @@ if (command === 'generate'){
         }
     }
 
+} else if (command === 'search'){
+    if (!masterPassword){
+        console.log('Missing master password for "search" command.');
+        process.exit(1);
+    }
+
+    const searchTerm = process.argv[4];
+    if (!searchTerm){
+        console.log('Missing search term for "search" command.');
+        process.exit(1);
+    }
+
+    //read vault
+    const vault = readVault();
+
+    if (vault.length === 0) {
+        console.log('Vault is empty.');
+        return;
+    }
+
+    let foundCount = 0;
+    //loop entries, try to get key from salt funtion
+    for (let i = 0; i < vault.length; i++) {
+        const entry = vault[i];
+
+        try{
+            const key = getKeyFromExistingSalt(masterPassword, entry.salt);
+            const decryptedData = decryptData(entry, key);
+
+            //check if website matches search term (case insensitive)
+            if (decryptedData.website.toLowerCase().includes(searchTerm.toLowerCase())) {
+                console.log(`Entry ${i + 1}:`);
+                console.log('Website:', decryptedData.website);
+                console.log('Username:', decryptedData.username);
+                console.log('Password:', decryptedData.password);
+                console.log('-----------------------');
+                foundCount++;
+            }
+        } catch (error) {
+            //If decryption fails, skip that entry
+        }
+    }
+
+    if (foundCount === 0) {
+        console.log('No entries found matching search term "' + searchTerm + '".');
+    } else {
+        console.log(`Found ${foundCount} entries matching search term "${searchTerm}".`);
+    }
 } else {
 
-  console.log('Unknown command. Please use "add" or "list".');
+  console.log('Unknown command. Please use "add", "list", "generate" or "search".');
 }
