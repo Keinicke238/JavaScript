@@ -1,29 +1,44 @@
-function executeOperation(a, b, operationFunc) {
-    return operationFunc(a, b);
+// Spørgsmål 5.a.a - funktioner som parameter
+function udfør(tal, operation){
+    return operation(tal)
 }
 
-function createMultiplier(multiplier) {
-    return function(number) {
-        return number * multiplier;
-    };
+const resultat = udfør(5, x => x * x)
+console.log(resultat)
+
+// Spørgsmål 5.a.b - funktion returnerer funktion
+function lavMultiplikator(faktor){
+    return function(tal){
+        return tal * faktor
+    }
 }
 
+const gangeMed3 = lavMultiplikator(3)
+console.log(gangeMed3(10))
 
-const multiplyArrow = (a, b) => a * b;
+// Spørgsmål 5.b - arrow funktion
+const gangeMed2 = (x) => x*2
+console.log(gangeMed2(5))
 
+const tal = [1, 2, 3]
+const dobbelt = tal.map(x => x * 2)
+console.log(dobbelt)
 
-const express = require('express');
-const app = express();
-app.use(express.json());
+// Spørgsmål 5.e - RESTful API med Express
+const express = request ("express")
+const app = express()
 
-app.get('/api/users', (req, res) => {
-    const users = [{ id: 1, name: 'Anna' }, { id: 2, name: 'Bo' }];
-    res.json(users);
-});
+app.use(express.json())
 
-app.post('/api/users', (req, res) => {
-    const newUser = req.body;
-    res.status(201).json({ message: 'Bruger oprettet', user: newUser });
-});
+const personer = [{id: 1, navn: "Bo"}]
 
-app.listen(3000);
+app.get("/personer", (req, res) => {
+    res.json(personer)
+})
+
+app.post("/personer", (req, res) => {
+    const nyPerson = { id: personer.length + 1, navn: req.body.navn}
+    personer.push(nyPerson)
+    res.status(201).json(nyPerson)
+})
+app.listen(3000, () => console.log("Server kører på port 3000"))
