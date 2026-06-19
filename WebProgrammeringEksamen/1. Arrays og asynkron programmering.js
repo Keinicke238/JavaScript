@@ -1,4 +1,4 @@
-// Spørgsmål 1.a blandet indhold og dynamisk størrelse
+// Spørgsmål 1.a
 const arr = [1, "hej", true, {navn: "Bo"}, () => 42]
 
 arr.push("ekstra")
@@ -7,7 +7,7 @@ arr[10] = "sparse"
 console.log(arr.length)
 console.log(arr[5])
 
-// Spørgsmål 1.b - map, filter, find, forEach
+// Spørgsmål 1.b
 const tal = [1,2,3,4,5]
 
 const doubled = tal.map(x => x * 2)
@@ -18,13 +18,15 @@ const foreste = tal.find(x => x > 3)
 
 tal.forEach(x => console.log(x))
 
-// Spørgsmål 1.d - Simpel callback
-setTimeout(()=> console.log("1 sekund er gået"), 1000)
+// Spørgsmål 1.d
+setTimeout(() => console.log("1 sekund er gået"), 1000)
 
 function load(url, callback) {
-    callback(data)
+    const minData = { besked: "Her er din data" } 
+    callback(minData)
 }
-load("/api", data => console.log(data))
+
+load("/api", (data) => console.log(data))
 
 // Spørgsmål 1. e - Promise med then/catch
 fetch("/api/brugere")
