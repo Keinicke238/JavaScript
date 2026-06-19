@@ -34,32 +34,34 @@ fetch("/api/brugere")
     .then(data => console.log(data))
     .catch(error => console.error("Fejl:", error))
 
-// Spørgsmål 1.f - Async/await
+// Spørgsmål 1.f
 async function hentBrugere() {
     try {
         const response = await fetch("/api/brugere")
         const data = await response.json()
-        return data
+        console.log(data)
     } catch (error) {
         console.error("Fejl:", error)
     }
 }
-hentBrugere().then(data => console.log(data))
 
-// Spørgmål 1.g - callback hell
+
+// Spørgmål 1.g
 getData(function(a) {
     getMore(a, function(b) {
         getMore(b, function(c) {
+                console.log(c)
             })
         })
 })
 
-// Spørgmål 1.g.1 - med async/await - fladt, læsbart, et try/catch
+// Spørgmål 1.g.1
 async function hentAlt() {
     try {
         const a = await getData()
         const b = await getMore(a)
         const c = await getEvenMore(b)
+        console.log(c)
     } catch (error) {
         console.error("Fejl:", error)
     }

@@ -1,10 +1,27 @@
-// Spørgsmål 2.a - click event
+// Spørgsmål 2.a
 const knap = document.getElementById("min-knap")
 knap.addEventListener("click", function(event){
     console.log("Klikket!", event.target)
 })
 
-// Spørgsmål 2.c - submit event + preventDefault
+//2.a.1
+function simpelHilsen() {
+    console.log("Klikket via HTML inline!");
+}
+
+const propKnap = document.getElementById("property-knap");
+propKnap.onclick = function(event) {
+    console.log("Klikket via DOM property!", event.target);
+};
+
+const liste = document.getElementById("min-liste");
+liste.addEventListener("click", function(event) {
+    if (event.target.tagName === "LI") {
+        console.log("Klikket på listepunkt:", event.target.textContent);
+    }
+});
+
+// Spørgsmål 2.c
 const form = document.getElementById("minForm")
 form.addEventListener("submit", function(event){
     event.preventDefault()
@@ -12,7 +29,7 @@ form.addEventListener("submit", function(event){
     console.log("Indsendt navn:", navn)
 })
 
-// Spørgsmål 2.h.a - komponent med JSX, props og state
+// Spørgsmål 2.h.a 
 import {useState} from "react"
 
 function Tæller({titel}) {
