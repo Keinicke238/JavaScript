@@ -28,7 +28,7 @@ function load(url, callback) {
 
 load("/api", (data) => console.log(data))
 
-// Spørgsmål 1. e - Promise med then/catch
+// Spørgsmål 1. e
 fetch("/api/brugere")
     .then(response => response.json())
     .then(data => console.log(data))

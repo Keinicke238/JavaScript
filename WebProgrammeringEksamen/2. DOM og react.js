@@ -46,7 +46,7 @@ function Tæller({titel}) {
     )
 }
 
-// Spørgsmål 2.h.b - anvendelse af komponenten
+// Spørgsmål 2.h.b
 function App() {
     return (
         <div>
