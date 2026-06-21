@@ -1,4 +1,4 @@
-// Spørgsmål 5.a.a - funktioner som parameter
+// Spørgsmål 5.a.1
 function udfør(tal, operation){
     return operation(tal)
 }
@@ -6,7 +6,7 @@ function udfør(tal, operation){
 const resultat = udfør(5, x => x * x)
 console.log(resultat)
 
-// Spørgsmål 5.a.b - funktion returnerer funktion
+// Spørgsmål 5.a.2
 function lavMultiplikator(faktor){
     return function(tal){
         return tal * faktor
@@ -16,7 +16,7 @@ function lavMultiplikator(faktor){
 const gangeMed3 = lavMultiplikator(3)
 console.log(gangeMed3(10))
 
-// Spørgsmål 5.b - arrow funktion
+// Spørgsmål 5.b
 const gangeMed2 = (x) => x*2
 console.log(gangeMed2(5))
 
@@ -24,7 +24,7 @@ const tal = [1, 2, 3]
 const dobbelt = tal.map(x => x * 2)
 console.log(dobbelt)
 
-// Spørgsmål 5.e - RESTful API med Express
+// Spørgsmål 5.e
 const express = require("express")
 const app = express()
 

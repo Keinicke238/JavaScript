@@ -1,16 +1,16 @@
-//Spørgsmål 4.a - simpel callback
+//Spørgsmål 4.a
 function hentData(callback){
     setTimeout(function() {
         const data = {navn: "Bo", alder: 25}
         callback(data)
     }, 1000)
 }
-
+ 
 hentData(function(data){
     console.log("Data modtaget:", data.navn)
 })
 
-// Spørgsmål 4.b - ES6 class
+// Spørgsmål 4.b
 class Person{
     constructor(navn, alder){
         this.navn = navn
@@ -30,12 +30,13 @@ class Studerende extends Person {
 const bo = new Studerende("Bo", 25, "Datamatiker")
 console.log(bo.hilsen())
 
-//Spørgsmål 4.e - Mongoose schema og persistering
+//Spørgsmål 4.e
 const mongoose = require("mongoose")
 
 mongoose.connect("mongodb://localhost:27017/testdb")
+
 const personSchema = new mongoose.Schema({
-    navn: {type: String, required: true},
+    navn: {type: String},
     alder: {type: Number}
 })
 

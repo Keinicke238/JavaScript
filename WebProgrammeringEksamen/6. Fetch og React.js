@@ -1,10 +1,10 @@
-// Spørgsmål 6.c.a - Fetch GET
+// Spørgsmål 6.c.a
 fetch("/api/personer")
 .then(res => res.json())
 .then(data => console.log(data))
 .catch(err => console.error(err))
 
-// Spørgsmål 6.c.b - Fetch POST
+// Spørgsmål 6.c.b
 fetch("/api/personer", {
     method: "POST",
     headers: { "Content-Type": "application/json"},
@@ -15,7 +15,7 @@ fetch("/api/personer", {
 .then(data => console.log("Oprettet:", data))
 .catch(err => console.error(err))
 
-// Spørgsmål 6.g.a - Komponent med JSX, Props og useState
+// Spørgsmål 6.g.a
 import {useState} from "react"
 
 function Tæller({titel}) {
@@ -32,7 +32,7 @@ function Tæller({titel}) {
     )
 }
 
-// Spørgsmål 6.g.b - Anvendelse af komponenten
+// Spørgsmål 6.g.b
 function App() {
     return (
         <div>
