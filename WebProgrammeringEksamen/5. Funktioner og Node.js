@@ -25,7 +25,7 @@ const dobbelt = tal.map(x => x * 2)
 console.log(dobbelt)
 
 // Spørgsmål 5.e - RESTful API med Express
-const express = request ("express")
+const express = require("express")
 const app = express()
 
 app.use(express.json())

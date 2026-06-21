@@ -42,7 +42,7 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model("Person", personSchema)
 
 async function gemPerson() {
-    const bo = new person ({navn: "Bo", alder: 25})
+    const bo = new Person ({navn: "Bo", alder: 25})
     await bo.save()
     console.log("Person gemt:", bo)
 }
